@@ -105,16 +105,6 @@ Plug 'mhinz/vim-signify'
 
 call plug#end()
 
-"Git
-nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <Leader>g :GFiles?
-nnoremap <silent> <Leader>]  :Tags<CR>
-nnoremap <silent> <Leader>b] :BTags<CR>
-nnoremap <silent> <Leader>c  :Commits<CR>
-nnoremap <silent> <Leader>bc :BCommits<CR>
-nnoremap <Leader>rg :Rg<Space>
-"nnoremap <Leader>!  :Rg!<Space>
-nnoremap <silent> <Leader>m :FZFMru<CR>
 
 
 " Vim only
@@ -137,8 +127,8 @@ map f :call ShowFuncName() <CR>
 
 
 "buffers
-nnoremap <leader><tab> :b#<cr>
-nnoremap <F5> :buffers<CR>:buffer<Space>
+"nnoremap <leader><tab> :b#<cr>
+"nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Tabs
 let notabs = 0
@@ -166,7 +156,9 @@ set ignorecase
 set smartcase
 set t_Co=256
 
-nmap <F9> :!clear ; make && clear && ./a.out<CR>
+"nmap <F9> :!clear ; make && clear && ./a.out<CR>
+nmap <F5> :!clear ; cargo run <CR>
+
 
 " Select without moving cursor
 nnoremap & *``
@@ -187,15 +179,17 @@ set smartcase       " ... unless they contain at least one capital letter
 " }}}
 "
 " feature install myc
-set rtp+=/usr/local/share/myc/vim
+"set rtp+=/usr/local/share/myc/vim
 
 set ruler
 
-
+set cursorline
+hi CursorLine cterm=none ctermbg=233
 
 "Folding
 
 hi Folded ctermbg=0 ctermfg=8
+set foldlevel=1
 set foldmethod=syntax " fold based on syntax highlighting
 inoremap <F9> <C-O>za
 nnoremap <F9> za
@@ -216,6 +210,32 @@ function! SimpleFoldText() " {{{2
 endfunction
 
 
+
 " Omnicompletetion
 let OmniCpp_MayCompleteDot = 1 " autocomplete after .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+
+
+" Rust
+let g:ycm_rust_src_path = '/home/leitao/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+
+" FZF
+nnoremap <C-f> :Files<CR>
+nnoremap <leader><leader> :History:<CR>
+nnoremap <C-h> :History<CR>
+nnoremap <silent> <Leader>m :FZFMru<CR>
+
+
+augroup previewWindowPosition
+   au!
+   autocmd BufWinEnter * call PreviewWindowPosition()
+augroup END
+function! PreviewWindowPosition()
+   if &previewwindow
+      wincmd L
+   endif
+endfunction
+

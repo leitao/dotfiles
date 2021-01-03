@@ -191,6 +191,9 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 # Disable border for some apps
 for_window [class="Firefox"]        border none
+for_window [class="Firefox"]        floating enable
+for_window [class="Spotify"]        floating enable
+for_window [class="Volume Control"]        floating enable
 
 
 # Two monitors

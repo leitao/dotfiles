@@ -102,6 +102,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'mhinz/vim-signify'
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
@@ -187,7 +188,6 @@ set cursorline
 hi CursorLine cterm=none ctermbg=233
 
 "Folding
-
 hi Folded ctermbg=0 ctermfg=8
 set foldlevel=1
 set foldmethod=syntax " fold based on syntax highlighting
@@ -209,17 +209,17 @@ function! SimpleFoldText() " {{{2
   return text
 endfunction
 
-
-
 " Omnicompletetion
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 
 
 " Rust
 let g:ycm_rust_src_path = '/home/leitao/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <leader>gt :YcmCompleter GoTo<CR>
+nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 
 
 " FZF
@@ -239,3 +239,8 @@ function! PreviewWindowPosition()
    endif
 endfunction
 
+
+" Cometing code
+#let g:NERDCreateDefaultMappings = 1
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv

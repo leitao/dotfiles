@@ -28,10 +28,6 @@ inoremap <M-b> <Esc>Bi
 inoremap <M-d> <ESC>cW
 map <M-d> <ESC>cW
 
-" Control space to auto complete
-inoremap <C-Space> <C-N>
-
-
 " Terminal fixes?
 inoremap <C-H> <C-W>
 inoremap <C-^H> <C-W>
@@ -214,12 +210,20 @@ endfunction
 " let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 
 
-" Rust
+" Rust (YCM)
 let g:ycm_rust_src_path = '/home/leitao/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Do not auto trigger YCM 
+let g:ycm_auto_trigger=0
+let g:ycm_auto_hover=''
+
 nnoremap <leader>gt :YcmCompleter GoTo<CR>
 nnoremap <leader>gd :YcmCompleter GetDoc<CR>
+
+" Avoid adding a new line whem pressing Enter in the preview/pop up menu
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 
 " FZF
@@ -241,6 +245,6 @@ endfunction
 
 
 " Cometing code
-#let g:NERDCreateDefaultMappings = 1
+"let g:NERDCreateDefaultMappings = 1
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
